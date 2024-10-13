@@ -1,0 +1,98 @@
+body, html {
+margin: 0;
+padding: 0;
+height: 100%;
+font-family: Arial, sans-serif;
+overflow: hidden; /* لمنع التمرير */
+}
+
+.page-container {
+background-image: url('https://example.com/background1.jpg');
+background-size: cover;
+background-position: center;
+height: 100vh; /* استخدام vh لضبط ارتفاع الصفحة */
+width: 100vw; /* استخدام vw لضبط عرض الصفحة */
+display: flex;
+justify-content: center;
+align-items: center;
+transition: background-image 0.5s ease-in-out;
+overflow: hidden;
+}
+
+.content {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 20px;
+background: transparent;
+border-radius: 10px;
+opacity: 0;
+transform: translateY(100px);
+transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.image {
+max-width: 100%;
+max-height: 200px;
+background: transparent;
+border: 2px solid white; /* إضافة border باللون الأبيض */
+border-radius: 30px; /* إضافة border-radius */
+}
+
+.text {
+margin-top: 20px;
+text-align: center;
+font-size: 20px;
+width: 300px;
+font-family: cursive;
+font-weight: bold;
+border: 3px solid white;
+border-radius: 5px;
+color: white;
+}
+
+.show {
+opacity: 1;
+transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+.content {
+flex-direction: row;
+justify-content: space-between;
+}
+
+.text {
+margin-top: 0;
+margin-left: 20px;
+}
+}
+
+@media (orientation: portrait) {
+.content {
+flex-direction: column-reverse;
+}
+}
+
+@media (orientation: landscape) {
+.content {
+flex-direction: row;
+width: 100%;
+height: 100%;
+}
+
+.text {
+width: 50%;
+margin-top: 20px;
+margin-left: 50px;
+text-align: center;
+font-size: 24px;
+}
+
+.image {
+width: 250px;
+max-height: none; /* إلغاء الحد الأقصى للارتفاع */
+margin-right: 20px;
+}
+}

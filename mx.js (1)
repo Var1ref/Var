@@ -1,0 +1,92 @@
+const pages = [
+  {
+    text: "La mondialisation est un phénomène complexe qui se caractérise par l'intensification des échanges économiques, culturels et technologiques à l'échelle mondiale. Elle a été accélérée par les avancées technologiques et les politiques libérales des pays.",
+    image: "https://img.over-blog-kiwi.com/1/11/24/15/20161205/ob_faae91_commerce-international-mondialisation.jpg",
+    background: "https://static.vecteezy.com/system/resources/thumbnails/014/378/559/small/dark-black-and-gray-blurred-gradient-background-has-a-little-abstract-light-soft-background-for-wallpaper-design-graphic-and-presentation-backdrop-wall-free-photo.jpg"
+  },
+  {
+    text: "النص في الصفحة الثانية",
+    image: "https://example.com/image2.jpg",
+    background: "https://img.freepik.com/premium-photo/black-background-black-background-wallpaper_1084438-1593.jpg"
+  },
+  {
+    text: "النص في الصفحة الثالثة",
+    image: "https://example.com/image3.jpg",
+    background: "https://img.freepik.com/premium-photo/black-background-black-background-wallpaper_1084438-1593.jpg"
+  },
+  {
+    text: "النص في الصفحة الرابعة",
+    image: "https://example.com/image4.jpg",
+    background: "https://img.freepik.com/premium-photo/black-background-black-background-wallpaper_1084438-1593.jpg"
+  },
+  {
+    text: "النص في الصفحة الخامسة",
+    image: "https://example.com/image5.jpg",
+    background: "https://img.freepik.com/premium-photo/black-background-black-background-wallpaper_1084438-1593.jpg"
+  },
+  {
+    text: "النص في الصفحة السادسة",
+    image: "https://example.com/image6.jpg",
+    background: "https://img.freepik.com/premium-photo/black-background-black-background-wallpaper_1084438-1593.jpg"
+  },
+  {
+    text: "النص في الصفحة السابعة",
+    image: "https://example.com/image7.jpg",
+    background: "https://img.freepik.com/premium-photo/black-background-black-background-wallpaper_1084438-1593.jpg"
+  },
+  {
+    text: "النص في الصفحة الثامنة",
+    image: "https://example.com/image8.jpg",
+    background: "https://example.com/background8.jpg"
+  }
+];
+
+let currentPage = 0;
+let startX = 0;
+let endX = 0;
+
+const pageContainer = document.querySelector('.page-container');
+const image = document.querySelector('.image');
+const text = document.querySelector('.text');
+const content = document.querySelector('.content');
+
+document.body.addEventListener('click', nextPage);
+
+document.body.addEventListener('touchstart', handleTouchStart, false);
+document.body.addEventListener('touchend', handleTouchEnd, false);
+
+function handleTouchStart(e) {
+  startX = e.changedTouches[0].screenX;
+}
+
+function handleTouchEnd(e) {
+  endX = e.changedTouches[0].screenX;
+  if (endX < startX) {
+    nextPage();
+  } else if (endX > startX) {
+    prevPage();
+  }
+}
+
+function nextPage() {
+  currentPage = (currentPage + 1) % pages.length;
+  updatePage();
+}
+
+function prevPage() {
+  currentPage = (currentPage - 1 + pages.length) % pages.length;
+  updatePage();
+}
+
+function updatePage() {
+  content.classList.remove('show');
+  
+  setTimeout(() => {
+    pageContainer.style.backgroundImage = `url('${pages[currentPage].background}')`;
+    image.src = pages[currentPage].image;
+    text.textContent = pages[currentPage].text;
+    content.classList.add('show');
+  }, 500);
+}
+
+updatePage();
